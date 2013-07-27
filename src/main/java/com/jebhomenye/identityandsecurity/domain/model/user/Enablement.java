@@ -12,6 +12,8 @@ import com.jebhomenye.domain.common.core.ValueObject;
 @Data
 @Accessors(fluent=true)
 public class Enablement implements ValueObject<Enablement> {
+	public static final Enablement INDEFINATE_ENABLED = new Enablement(null, null, true);
+	
 	private final DateTime startDate;
 	private final DateTime endDate;
 	

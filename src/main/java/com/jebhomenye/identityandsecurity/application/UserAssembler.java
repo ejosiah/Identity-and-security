@@ -3,16 +3,7 @@ package com.jebhomenye.identityandsecurity.application;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.jebhomenye.identityandsecurity.domain.model.user.AccessControlService;
-import com.jebhomenye.identityandsecurity.domain.model.user.Address;
-import com.jebhomenye.identityandsecurity.domain.model.user.ContactInfo;
-import com.jebhomenye.identityandsecurity.domain.model.user.EmailAddress;
-import com.jebhomenye.identityandsecurity.domain.model.user.FullName;
-import com.jebhomenye.identityandsecurity.domain.model.user.PasswordService;
-import com.jebhomenye.identityandsecurity.domain.model.user.Telephone;
-import com.jebhomenye.identityandsecurity.domain.model.user.User;
-import com.jebhomenye.identityandsecurity.domain.model.user.UserId;
-import com.jebhomenye.identityandsecurity.domain.model.user.UserRepository;
+import com.jebhomenye.identityandsecurity.domain.model.user.*;
 
 @Named
 public class UserAssembler {

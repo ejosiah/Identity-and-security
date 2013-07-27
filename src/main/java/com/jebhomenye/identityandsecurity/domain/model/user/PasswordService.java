@@ -69,15 +69,15 @@ public class PasswordService {
     }
 
     public boolean isStrong(String aPlainTextPassword) {
-        return this.calculatePasswordStrength(aPlainTextPassword) >= STRONG_THRESHOLD;
+        return calculatePasswordStrength(aPlainTextPassword) >= STRONG_THRESHOLD;
     }
 
     public boolean isVeryStrong(String aPlainTextPassword) {
-        return this.calculatePasswordStrength(aPlainTextPassword) >= VERY_STRONG_THRESHOLD;
+        return calculatePasswordStrength(aPlainTextPassword) >= VERY_STRONG_THRESHOLD;
     }
 
     public boolean isWeak(String aPlainTextPassword) {
-        return this.calculatePasswordStrength(aPlainTextPassword) < STRONG_THRESHOLD;
+        return calculatePasswordStrength(aPlainTextPassword) < STRONG_THRESHOLD;
     }
 
     private int calculatePasswordStrength(String aPlainTextPassword) {
