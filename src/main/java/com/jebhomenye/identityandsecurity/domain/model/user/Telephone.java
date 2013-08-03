@@ -1,13 +1,13 @@
 package com.jebhomenye.identityandsecurity.domain.model.user;
 
-import org.apache.commons.lang3.Validate;
-
-import lombok.Value;
+import lombok.Data;
 import lombok.experimental.Accessors;
+
+import org.apache.commons.lang3.Validate;
 
 import com.jebhomenye.domain.common.core.ValueObject;
 
-@Value
+@Data
 @Accessors(fluent=true)
 public class Telephone implements ValueObject<Telephone> {
 	private static final String TELEPHONE_PATTERN = "((\\(\\d{3}\\))|(\\d{3}-))\\d{3}-\\d{5}";

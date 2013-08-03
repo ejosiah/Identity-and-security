@@ -31,6 +31,10 @@ public class UserAssemblerUTest {
 	@Mock RegisterUserCommand registerUserCommand;
 	@Mock AccessControlService accessControlService;
 	@Mock Group group;
+	@Mock Address address;
+	@Mock Telephone primaryTelephone;
+	@Mock Telephone secondaryTelephone;
+	@Mock EmailAddress emailAddress;
 	
 	@InjectMocks private UserAssembler userAssembler;
 	@Before
@@ -47,13 +51,10 @@ public class UserAssemblerUTest {
 		when(registerUserCommand.getPassword()).thenReturn(PASSWORD);
 		when(registerUserCommand.getFirstname()).thenReturn("Josiah");
 		when(registerUserCommand.getLastname()).thenReturn("Ebhomenye");
-		when(registerUserCommand.getEmailAddress()).thenReturn("user1@test.com");
-		when(registerUserCommand.getStreet()).thenReturn("17 Mead Road");
-		when(registerUserCommand.getPostcode()).thenReturn("HA8 6LH");
-		when(registerUserCommand.getCity()).thenReturn("Edgware");
-		when(registerUserCommand.getCountry()).thenReturn("UK");
-		when(registerUserCommand.getPrimaryTelephone()).thenReturn("078-542-00230");
-		when(registerUserCommand.getSecondaryTelephone()).thenReturn(null);
+		when(registerUserCommand.emailAddress()).thenReturn(emailAddress);
+		when(registerUserCommand.address()).thenReturn(address);
+		when(registerUserCommand.primaryTelephone()).thenReturn(primaryTelephone);
+		when(registerUserCommand.secondaryTelephone()).thenReturn(secondaryTelephone);
 		when(registerUserCommand.getGroup()).thenReturn("testGroup");
 		
 		User expected = expected();
@@ -71,11 +72,11 @@ public class UserAssemblerUTest {
 				.id(USER_ID)
 				.fullName(new FullName("Josiah", "Ebhomenye"))
 				.contactInfo(new ContactInfo(
-						new EmailAddress("user1@test.com")
-						, new Address("17 Mead Road", "HA8 6LH", "Edgware", "UK")
+						emailAddress
+						, address
 						, null
-						, new Telephone("078-542-00230") 
-						, null))
+						, primaryTelephone
+						, secondaryTelephone))
 				.group(group)
 			.build();
 			

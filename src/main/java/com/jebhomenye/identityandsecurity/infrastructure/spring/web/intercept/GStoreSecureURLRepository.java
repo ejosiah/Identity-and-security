@@ -1,4 +1,4 @@
-package com.jebhomenye.identityandsecurity.infrastructure.spring;
+package com.jebhomenye.identityandsecurity.infrastructure.spring.web.intercept;
 
 import java.util.List;
 
@@ -10,6 +10,12 @@ public class GStoreSecureURLRepository implements SecureURLRepository{
 	public List<SecureURL> getSecuredURLS() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void add(SecureURL secureURL) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

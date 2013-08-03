@@ -20,17 +20,11 @@ public class UserAssembler {
 				.fullName(new FullName(registerUserCommand.getFirstname()
 						, registerUserCommand.getLastname()))
 				.contactInfo(new ContactInfo(
-						new EmailAddress(registerUserCommand.getEmailAddress())
-						, new Address(
-								registerUserCommand.getStreet()
-								, registerUserCommand.getPostcode()
-								, registerUserCommand.getCity()
-								, registerUserCommand.getCountry())
+						registerUserCommand.emailAddress()
+						, registerUserCommand.address()
 						, null
-						, (registerUserCommand.getPrimaryTelephone()  != null ?
-							new Telephone(registerUserCommand.getPrimaryTelephone()) : null)
-						, (registerUserCommand.getSecondaryTelephone() != null ?
-							new Telephone(registerUserCommand.getSecondaryTelephone()) : null)))
+						, registerUserCommand.primaryTelephone() 
+						, registerUserCommand.secondaryTelephone()))
 				.group(accessControlService.getGroupByName(registerUserCommand.getGroup()))
 			.build();
 	}

@@ -1,11 +1,11 @@
 package com.jebhomenye.identityandsecurity.domain.model.user;
 
-import lombok.Value;
+import lombok.Data;
 import lombok.experimental.Accessors;
 
 import com.jebhomenye.domain.common.core.ValueObject;
 
-@Value
+@Data
 @Accessors(fluent=true)
 public class Address implements ValueObject<Address> {
 	private final String street;

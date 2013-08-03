@@ -4,5 +4,7 @@ import java.util.List;
 
 public interface SecureURLRepository {
 	
+	void add(SecureURL secureURL);
+	
 	List<SecureURL> getSecuredURLS();
 }

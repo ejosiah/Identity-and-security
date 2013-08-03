@@ -1,27 +1,20 @@
 package com.jebhomenye.identityandsecurity.domain.model.web;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 import lombok.Getter;
-
-import com.jebhomenye.identityandsecurity.domain.model.user.Role;
 
 @Getter
 public class SecureURL {
 	private String pattern;
-	private List<Role> access = new ArrayList<Role>();
+	private Collection<String> configs;
 	
 	SecureURL(){
 		
 	}
 	
-	public SecureURL(String pattern){
+	public SecureURL(String pattern, Collection<String> configs){
 		this.pattern = pattern;
+		this.configs = configs;
 	}
-	
-	public void addRole(Role role){
-		access.add(role);
-	}
-
 }

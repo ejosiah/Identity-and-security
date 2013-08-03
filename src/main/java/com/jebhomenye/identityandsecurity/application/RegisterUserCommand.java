@@ -1,5 +1,10 @@
 package com.jebhomenye.identityandsecurity.application;
 
+import com.jebhomenye.identityandsecurity.domain.model.user.Address;
+import com.jebhomenye.identityandsecurity.domain.model.user.EmailAddress;
+import com.jebhomenye.identityandsecurity.domain.model.user.FullName;
+import com.jebhomenye.identityandsecurity.domain.model.user.Telephone;
+
 import lombok.Data;
 import lombok.experimental.Builder;
 
@@ -21,4 +26,39 @@ public class RegisterUserCommand {
 	private String secondaryTelephone;
 	
 	private String group;
+	
+	public FullName fullName(){
+		if(firstname == null && lastname == null){
+			return null;
+		}
+		return new FullName(firstname, lastname);
+	}
+	
+	public Address address(){
+		if(street == null && city == null && postcode == null && country == null){
+			return null;
+		}
+		return new Address(street, postcode, city, country);
+	}
+	
+	public Telephone primaryTelephone(){
+		if(primaryTelephone == null){
+			return null;
+		}
+		return new Telephone(getPrimaryTelephone());
+	}
+	
+	public Telephone secondaryTelephone(){
+		if(secondaryTelephone == null){
+			return null;
+		}
+		return new Telephone(secondaryTelephone);
+	}
+	
+	public EmailAddress emailAddress(){
+		if(emailAddress == null){
+			return null;
+		}
+		return new EmailAddress(emailAddress);
+	}
 }

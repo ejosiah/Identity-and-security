@@ -1,13 +1,13 @@
 package com.jebhomenye.identityandsecurity.domain.model.user;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
+
 import org.apache.commons.lang3.Validate;
 
 import com.jebhomenye.domain.common.core.ValueObject;
 
-import lombok.Value;
-import lombok.experimental.Accessors;
-
-@Value
+@Data
 @Accessors(fluent=true)
 public class EmailAddress implements ValueObject<EmailAddress> {
 	private static final String EMAIL_PATTERN = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
