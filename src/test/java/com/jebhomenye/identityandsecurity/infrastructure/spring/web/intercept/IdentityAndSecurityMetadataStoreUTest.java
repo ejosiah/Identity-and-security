@@ -67,11 +67,11 @@ public class IdentityAndSecurityMetadataStoreUTest {
 
 	@Test
 	public void testAfterPropertiesSet() throws Exception {
+		TestUtil.set("delegate", null, metadataSource);
+		TestUtil.set("expressionHandler", new DefaultWebSecurityExpressionHandler(), metadataSource);
 		when(secureURLRepository.getSecuredURLS()).thenReturn(securedURLs);
 		when(securedURLs.iterator()).thenReturn(
 				new ArrayList<SecureURL>().iterator());
-		TestUtil.set("delegate", null, metadataSource);
-		TestUtil.set("expressionHandler", new DefaultWebSecurityExpressionHandler(), metadataSource);
 		assertNull(metadataSource.delegate());
 		
 		metadataSource.afterPropertiesSet();
