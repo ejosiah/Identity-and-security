@@ -1,6 +1,7 @@
 package com.jebhomenye.identityandsecurity.domain.model.web;
 
 import java.util.Collection;
+import java.util.Collections;
 
 import lombok.Getter;
 
@@ -11,6 +12,10 @@ public class SecureURL {
 	
 	SecureURL(){
 		
+	}
+	
+	public SecureURL(String pattern, String config){
+		this(pattern, Collections.singleton(config));
 	}
 	
 	public SecureURL(String pattern, Collection<String> configs){

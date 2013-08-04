@@ -1,12 +1,14 @@
 package com.jebhomenye.identityandsecurity.infrastructure.persistence.mongo;
 
 import java.lang.reflect.Constructor;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import lombok.SneakyThrows;
 
+import org.bson.types.ObjectId;
 import org.jongo.MongoCollection;
 
 @Named
@@ -17,10 +19,13 @@ public class MongoIdGenerator  {
 	
 	public <T> T nextId(Class<T> forType){
 		String name = name(forType);
-		String query = String.format(QueryTemplate.NEXT_ID, name);
-		Long id = ids().findAndModify(query).projection("nextId").as(Long.class);
+		IdResult result = ids().findAndModify("{name : #}", name)
+							.with("{$inc : {nextId : 1}}")
+							.upsert()
+							.returnNew()
+						.as(IdResult.class);
 		
-		return createId(forType, id);
+		return createId(forType, result.nextId);
 		
 	}
 	
@@ -38,4 +43,10 @@ public class MongoIdGenerator  {
 		Constructor<T> constructor = forType.getDeclaredConstructor(Long.class);
 		return (T)constructor.newInstance(id);
 	}
+	
+	private static class IdResult{
+		private Long nextId;
+		
+	}
+
 }

@@ -23,13 +23,15 @@ import com.jebhomenye.identityandsecurity.domain.model.web.SecureURL;
 import com.jebhomenye.identityandsecurity.domain.model.web.SecureURLRepository;
 
 
-@Named
 public class IdentityAndSecurityMetadataSource implements FilterInvocationSecurityMetadataSource, InitializingBean {
 	
-    @Inject private SecureURLRepository secureURLRepository;
-    
-    @Inject @Named("defaultWebSecurityExpressionHandler")
+    private SecureURLRepository secureURLRepository;
     private SecurityExpressionHandler<FilterInvocation> expressionHandler;
+    
+    public IdentityAndSecurityMetadataSource(SecureURLRepository secureURLRepository, SecurityExpressionHandler<FilterInvocation> expressionHandler){
+    	this.secureURLRepository = secureURLRepository;
+    	this.expressionHandler = expressionHandler;
+    }
     
     private FilterInvocationSecurityMetadataSource delegate;
 	

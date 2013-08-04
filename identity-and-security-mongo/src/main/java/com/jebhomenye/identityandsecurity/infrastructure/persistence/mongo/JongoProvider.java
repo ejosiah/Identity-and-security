@@ -7,7 +7,6 @@ import javax.inject.Provider;
 
 import org.jongo.Jongo;
 import org.jongo.marshall.jackson.JacksonMapper;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.mongodb.MongoDbFactory;
 
 import com.fasterxml.jackson.datatype.joda.JodaModule;
@@ -18,15 +17,12 @@ public class JongoProvider implements Provider<Jongo>{
 	
 	private Jongo jongo;
 	
-	@Value("mongo.database")
-	private String database;
-	
 	@Inject
-	private MongoDbFactory mongoDBFactory;
+	private MongoDbFactory mongoDbFactory;
 	
 	@PostConstruct
 	public void init(){
-		DB db = mongoDBFactory.getDb(database);
+		DB db = mongoDbFactory.getDb();
 		jongo = new Jongo(db
 				, new JacksonMapper.Builder()
 					.registerModule(new JodaModule())

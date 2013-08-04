@@ -1,6 +1,7 @@
 package com.jebhomenye.identityandsecurity.infrastructure.spring;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,6 +11,7 @@ import com.jebhomenye.identityandsecurity.domain.model.user.NoUserException;
 import com.jebhomenye.identityandsecurity.domain.model.user.User;
 import com.jebhomenye.identityandsecurity.domain.model.user.UserRepository;
 
+@Named
 public class UserDetailAdaptor implements UserDetailsService{
 	
 	@Inject private UserRepository userRepository;
