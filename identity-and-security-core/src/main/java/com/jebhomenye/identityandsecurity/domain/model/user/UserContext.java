@@ -2,7 +2,7 @@ package com.jebhomenye.identityandsecurity.domain.model.user;
 
 public interface UserContext {
 	
-	User currentUser();
+	IdentityUser currentUser();
 	
-	void setCurrentUser(User user);
+	void setCurrentUser(IdentityUser user);
 }

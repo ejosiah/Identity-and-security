@@ -1,7 +1,8 @@
 package com.jebhomenye.identityandsecurity.application;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,17 +10,15 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.jebhomenye.identityandsecurity.application.RegisterUserCommand;
-import com.jebhomenye.identityandsecurity.application.UserAssembler;
 import com.jebhomenye.identityandsecurity.domain.model.user.AccessControlService;
 import com.jebhomenye.identityandsecurity.domain.model.user.Address;
 import com.jebhomenye.identityandsecurity.domain.model.user.ContactInfo;
 import com.jebhomenye.identityandsecurity.domain.model.user.EmailAddress;
 import com.jebhomenye.identityandsecurity.domain.model.user.FullName;
 import com.jebhomenye.identityandsecurity.domain.model.user.Group;
+import com.jebhomenye.identityandsecurity.domain.model.user.IdentityUser;
 import com.jebhomenye.identityandsecurity.domain.model.user.PasswordService;
 import com.jebhomenye.identityandsecurity.domain.model.user.Telephone;
-import com.jebhomenye.identityandsecurity.domain.model.user.User;
 import com.jebhomenye.identityandsecurity.domain.model.user.UserId;
 import com.jebhomenye.identityandsecurity.domain.model.user.UserRepository;
 
@@ -59,14 +58,14 @@ public class UserAssemblerUTest {
 		when(registerUserCommand.secondaryTelephone()).thenReturn(secondaryTelephone);
 		when(registerUserCommand.getGroup()).thenReturn("testGroup");
 		
-		User expected = expected();
-		User actual = userAssembler.assembleFrom(registerUserCommand);
+		IdentityUser expected = expected();
+		IdentityUser actual = userAssembler.assembleFrom(registerUserCommand);
 		
 		assertEquals(expected, actual);
 	}
 	
-	public User expected(){
-		User.UserBuilder builder = User.builder();
+	public IdentityUser expected(){
+		IdentityUser.IdentityUserBuilder builder = IdentityUser.builder();
 		return 
 			builder
 				.username("user1@test.com")

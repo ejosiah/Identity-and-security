@@ -13,7 +13,7 @@ import com.jebhomenye.domain.common.core.Entity;
 @Data
 @Builder
 @Accessors(fluent=true)
-public class User implements Entity<User, UserId> {
+public class IdentityUser implements Entity<IdentityUser, UserId> {
 	
 	private UserId id;
 	private FullName fullName;
@@ -23,11 +23,11 @@ public class User implements Entity<User, UserId> {
 	private String password;
 	private Group group;
 	
-	User(){
+	IdentityUser(){
 		
 	}
 	
-	private User(UserId id, FullName fullName, ContactInfo contactInfo, Enablement enablement
+	private IdentityUser(UserId id, FullName fullName, ContactInfo contactInfo, Enablement enablement
 			,String username, String password, Group group){
 		id(id);
 		fullName(fullName);
@@ -62,7 +62,7 @@ public class User implements Entity<User, UserId> {
 		return enablement.isEnabled();
 	}
 	
-	public boolean sameIdentityAs(User other) {
+	public boolean sameIdentityAs(IdentityUser other) {
 		return this.id.sameValuesAs(other.id);
 	}
 	

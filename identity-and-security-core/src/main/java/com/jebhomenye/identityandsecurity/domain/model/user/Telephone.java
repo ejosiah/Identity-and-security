@@ -1,6 +1,7 @@
 package com.jebhomenye.identityandsecurity.domain.model.user;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import org.apache.commons.lang3.Validate;
@@ -9,9 +10,10 @@ import com.jebhomenye.domain.common.core.ValueObject;
 
 @Data
 @Accessors(fluent=true)
+@NoArgsConstructor
 public class Telephone implements ValueObject<Telephone> {
 	private static final String TELEPHONE_PATTERN = "((\\(\\d{3}\\))|(\\d{3}-))\\d{3}-\\d{5}";
-	private final String value;
+	private String value;
 	
 	public Telephone(String value){
 		Validate.notNull(value, "Telephone number is required");

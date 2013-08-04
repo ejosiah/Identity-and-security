@@ -13,7 +13,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.jebhomenye.identityandsecurity.application.RegisterUserCommand;
 import com.jebhomenye.identityandsecurity.application.RegistratoinService;
 import com.jebhomenye.identityandsecurity.application.UserAssembler;
-import com.jebhomenye.identityandsecurity.domain.model.user.User;
+import com.jebhomenye.identityandsecurity.domain.model.user.IdentityUser;
 import com.jebhomenye.identityandsecurity.domain.model.user.UserRepository;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -22,7 +22,7 @@ public class RegistratoinServiceUTest {
 	@Mock private UserRepository userRepository;
 	@Mock private UserAssembler userAssembler;
 	@Mock private RegisterUserCommand registerUser;
-	@Mock private User user;
+	@Mock private IdentityUser user;
 	
 	@InjectMocks private RegistratoinService registrationService;
 	

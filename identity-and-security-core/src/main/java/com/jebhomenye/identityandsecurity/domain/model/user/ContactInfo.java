@@ -1,10 +1,20 @@
 package com.jebhomenye.identityandsecurity.domain.model.user;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.Value;
+import lombok.experimental.Accessors;
 
 import com.jebhomenye.domain.common.core.ValueObject;
 
-@Value
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter(AccessLevel.NONE)
+@Accessors(fluent=true)
 public class ContactInfo implements ValueObject<ContactInfo> {
 	private EmailAddress emailAddress;
 	private Address homeAddress;

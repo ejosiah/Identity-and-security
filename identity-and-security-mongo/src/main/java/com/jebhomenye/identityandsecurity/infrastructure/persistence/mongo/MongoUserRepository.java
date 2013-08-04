@@ -8,27 +8,27 @@ import static java.lang.String.*;
 import org.apache.commons.lang3.Validate;
 import org.jongo.MongoCollection;
 
-import com.jebhomenye.identityandsecurity.domain.model.user.User;
+import com.jebhomenye.identityandsecurity.domain.model.user.IdentityUser;
 import com.jebhomenye.identityandsecurity.domain.model.user.UserId;
 import com.jebhomenye.identityandsecurity.domain.model.user.UserRepository;
 
 @Named
 public class MongoUserRepository implements UserRepository{
 	
-	private static final Class<User> USER = User.class;
+	private static final Class<IdentityUser> USER = IdentityUser.class;
 	private static final String USER_COLLECTION = USER.getSimpleName().toLowerCase();
 	
 	@Inject private JongoProvider jongoProvider;
 	@Inject private MongoIdGenerator idGenerator;
 	
 	@Override
-	public void add(User user) {
+	public void add(IdentityUser user) {
 		Validate.notNull(user, "user is required");
 		users().save(user);
 	}
 
 	@Override
-	public User userOfUsername(String username) {
+	public IdentityUser userOfUsername(String username) {
 		Validate.notNull(username, "username is required");
 		String byUsername = format("{ username : \"%s\"}", username);
 		return users().findOne(byUsername).as(USER);

@@ -14,8 +14,10 @@
 		<bean id="passwordEncorder" class="org.springframework.security.crypto.password.StandardPasswordEncoder" />
 		<bean id="defaultWebSecurityExpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
 			
-		<security:authentication-manager>
-			<security:authentication-provider user-service-ref="userDetailAdaptor" />
+		<security:authentication-manager >
+			<security:authentication-provider user-service-ref="userDetailAdaptor">
+				<security:password-encoder ref="passwordEncorder" />
+			</security:authentication-provider>
 		</security:authentication-manager>		
 		<security:http auto-config="true" use-expressions="true">
 		</security:http>

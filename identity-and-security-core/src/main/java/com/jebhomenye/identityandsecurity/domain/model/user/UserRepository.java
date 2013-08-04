@@ -2,9 +2,9 @@ package com.jebhomenye.identityandsecurity.domain.model.user;
 
 public interface UserRepository {
 	
-	void add(User user);
+	void add(IdentityUser user);
 	
-	User userOfUsername(String username);
+	IdentityUser userOfUsername(String username);
 	
 	UserId nextIdentity();
 }

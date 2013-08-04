@@ -17,14 +17,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.jebhomenye.identityandsecurity.domain.model.user.Enablement;
 import com.jebhomenye.identityandsecurity.domain.model.user.Group;
 import com.jebhomenye.identityandsecurity.domain.model.user.Role;
-import com.jebhomenye.identityandsecurity.domain.model.user.User;
+import com.jebhomenye.identityandsecurity.domain.model.user.IdentityUser;
 import com.jebhomenye.identityandsecurity.infrastructure.spring.UserDetailsAssembler;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserDetailsAssemblerUTest {
 	private static final String USERNAME = "user1@test.com";
 	private static final String PASSWORD = "user1xxxx";
-	@Mock private User user;
+	@Mock private IdentityUser user;
 	@Mock private Group group;
 	@Mock private Role adminRole;
 	@Mock private Role userRole;
@@ -43,8 +43,8 @@ public class UserDetailsAssemblerUTest {
 		when(user.group()).thenReturn(group);
 		when(user.enablement()).thenReturn(userEnablement);
 		when(group.roles()).thenReturn(Arrays.asList(adminRole, userRole));
-		when(adminRole.value()).thenReturn("ROLE_ADMIN");
-		when(userRole.value()).thenReturn("USER_ROLE");
+		when(adminRole.name()).thenReturn("ROLE_ADMIN");
+		when(userRole.name()).thenReturn("USER_ROLE");
 		when(userEnablement.isEnabled()).thenReturn(true);
 		when(userEnablement.timeExpired()).thenReturn(false);
 		

@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.jebhomenye.identityandsecurity.domain.model.user.NoUserException;
-import com.jebhomenye.identityandsecurity.domain.model.user.User;
+import com.jebhomenye.identityandsecurity.domain.model.user.IdentityUser;
 import com.jebhomenye.identityandsecurity.domain.model.user.UserRepository;
 
 @Named
@@ -18,11 +18,11 @@ public class UserDetailAdaptor implements UserDetailsService{
 	@Inject UserDetailsAssembler userDetailsAssembler;
 
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = getUser(username);
+		IdentityUser user = getUser(username);
 		return userDetailsAssembler.assembleFrom(user);
 	}
 	
-	private User getUser(String username){
+	private IdentityUser getUser(String username){
 		try{
 			return userRepository.userOfUsername(username);
 		}catch(NoUserException e){

@@ -12,8 +12,8 @@ public class UserAssembler {
 	@Inject private PasswordService passwordService;
 	@Inject private AccessControlService accessControlService;
 	
-	public User assembleFrom(RegisterUserCommand registerUserCommand){
-		return User.builder()
+	public IdentityUser assembleFrom(RegisterUserCommand registerUserCommand){
+		return IdentityUser.builder()
 				.username(registerUserCommand.getUsername())
 				.password(passwordService.encyrpt(registerUserCommand.getPassword()))
 				.id(userRepository.nextIdentity())

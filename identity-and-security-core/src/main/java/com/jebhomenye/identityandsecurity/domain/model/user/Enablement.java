@@ -3,22 +3,28 @@ package com.jebhomenye.identityandsecurity.domain.model.user;
 import org.joda.time.DateTime;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import com.jebhomenye.domain.common.core.ValueObject;
 
 @Data
 @Accessors(fluent=true)
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter(AccessLevel.NONE)
 public class Enablement implements ValueObject<Enablement> {
 	public static final Enablement INDEFINATLY_ENABLED = new Enablement(null, null, true);
 	
-	private final DateTime startDate;
-	private final DateTime endDate;
+	private DateTime startDate;
+	private DateTime endDate;
 	
 	@Getter(value=AccessLevel.NONE)
-	private final boolean enabled;
+	private boolean enabled;
 	
 	public boolean isEnabled(){
 		return enabled && !timeExpired();
