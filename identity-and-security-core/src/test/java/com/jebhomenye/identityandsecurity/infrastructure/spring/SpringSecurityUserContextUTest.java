@@ -13,7 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import com.jebhomenye.identityandsecurity.domain.model.user.IdentityUser;
+import com.jebhomenye.identityandsecurity.domain.model.user.User;
 import com.jebhomenye.identityandsecurity.domain.model.user.UserRepository;
 import com.jebhomenye.identityandsecurity.infrastructure.spring.SpringSecurityUserContext;
 
@@ -24,7 +24,7 @@ public class SpringSecurityUserContextUTest {
 	@Mock SecurityContext securityContext;
 	@Mock Authentication authentication;
 	@Mock UserRepository userRepository;
-	@Mock IdentityUser user;
+	@Mock User user;
 	
 	@InjectMocks
 	SpringSecurityUserContext userContext;
@@ -45,8 +45,8 @@ public class SpringSecurityUserContextUTest {
 		when(authentication.getName()).thenReturn(USER_NAME);
 		when(userRepository.userOfUsername(USER_NAME)).thenReturn(user);
 		
-		IdentityUser expected = user;
-		IdentityUser actual = userContext.currentUser();
+		User expected = user;
+		User actual = userContext.currentUser();
 		
 		assertEquals(expected, actual);
 	}

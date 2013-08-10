@@ -14,7 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.jebhomenye.identityandsecurity.domain.model.user.IdentityUser;
+import com.jebhomenye.identityandsecurity.domain.model.user.User;
 import com.jebhomenye.identityandsecurity.domain.model.user.UserId;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -22,7 +22,7 @@ public class MongoUserRepositoryUTest {
 	private static final UserId USER_ID = new UserId(1L);
 	@Mock Jongo jongo;
 	@Mock JongoProvider jongoProvider;
-	@Mock IdentityUser user;
+	@Mock User user;
 	@Mock MongoIdGenerator idGenerator;
 	@Mock MongoCollection users;
 	@Mock FindOne findOne;
@@ -45,10 +45,10 @@ public class MongoUserRepositoryUTest {
 	@Test
 	public void testUserOfUsername() {
 		when(users.findOne("{ username : \"test@example.com\"}")).thenReturn(findOne);
-		when(findOne.as(IdentityUser.class)).thenReturn(user);
+		when(findOne.as(User.class)).thenReturn(user);
 		
-		IdentityUser expected = user;
-		IdentityUser actual = mongoUserRepository.userOfUsername("test@example.com");
+		User expected = user;
+		User actual = mongoUserRepository.userOfUsername("test@example.com");
 		
 		assertEquals(expected, actual);
 	}

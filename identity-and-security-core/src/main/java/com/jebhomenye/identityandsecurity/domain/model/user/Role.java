@@ -13,10 +13,10 @@ import com.jebhomenye.domain.common.core.ValueObject;
 @Accessors(fluent=true)
 @AllArgsConstructor
 public class Role implements ValueObject<Role> {
-	private final String name;
+	private final String value;
 	
 	Role(){
-		name = null;
+		value = null;
 	}
 	public boolean sameValuesAs(Role other) {
 		return this.sameValuesAs(other);

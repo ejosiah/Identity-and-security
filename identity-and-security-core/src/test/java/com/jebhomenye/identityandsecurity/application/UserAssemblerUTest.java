@@ -16,7 +16,7 @@ import com.jebhomenye.identityandsecurity.domain.model.user.ContactInfo;
 import com.jebhomenye.identityandsecurity.domain.model.user.EmailAddress;
 import com.jebhomenye.identityandsecurity.domain.model.user.FullName;
 import com.jebhomenye.identityandsecurity.domain.model.user.Group;
-import com.jebhomenye.identityandsecurity.domain.model.user.IdentityUser;
+import com.jebhomenye.identityandsecurity.domain.model.user.User;
 import com.jebhomenye.identityandsecurity.domain.model.user.PasswordService;
 import com.jebhomenye.identityandsecurity.domain.model.user.Telephone;
 import com.jebhomenye.identityandsecurity.domain.model.user.UserId;
@@ -58,14 +58,14 @@ public class UserAssemblerUTest {
 		when(registerUserCommand.secondaryTelephone()).thenReturn(secondaryTelephone);
 		when(registerUserCommand.getGroup()).thenReturn("testGroup");
 		
-		IdentityUser expected = expected();
-		IdentityUser actual = userAssembler.assembleFrom(registerUserCommand);
+		User expected = expected();
+		User actual = userAssembler.assembleFrom(registerUserCommand);
 		
 		assertEquals(expected, actual);
 	}
 	
-	public IdentityUser expected(){
-		IdentityUser.IdentityUserBuilder builder = IdentityUser.builder();
+	public User expected(){
+		User.IdentityUserBuilder builder = User.builder();
 		return 
 			builder
 				.username("user1@test.com")

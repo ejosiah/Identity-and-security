@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.jebhomenye.identityandsecurity.domain.model.user.NoUserException;
-import com.jebhomenye.identityandsecurity.domain.model.user.IdentityUser;
+import com.jebhomenye.identityandsecurity.domain.model.user.User;
 import com.jebhomenye.identityandsecurity.domain.model.user.UserRepository;
 import com.jebhomenye.identityandsecurity.infrastructure.spring.UserDetailAdaptor;
 import com.jebhomenye.identityandsecurity.infrastructure.spring.UserDetailsAssembler;
@@ -24,7 +24,7 @@ public class UserDetailAdaptorUTest {
 	@Mock private UserRepository userRepository;
 	@Mock private UserDetailsAssembler userDetailsAssembler;
 	@Mock private UserDetails userDetails;
-	@Mock private IdentityUser user;
+	@Mock private User user;
 	
 	@InjectMocks private UserDetailAdaptor userDetailsAdaptor;
 	

@@ -12,20 +12,19 @@ public class UserAssembler {
 	@Inject private PasswordService passwordService;
 	@Inject private AccessControlService accessControlService;
 	
-	public IdentityUser assembleFrom(RegisterUserCommand registerUserCommand){
-		return IdentityUser.builder()
-				.username(registerUserCommand.getUsername())
-				.password(passwordService.encyrpt(registerUserCommand.getPassword()))
-				.id(userRepository.nextIdentity())
-				.fullName(new FullName(registerUserCommand.getFirstname()
-						, registerUserCommand.getLastname()))
-				.contactInfo(new ContactInfo(
-						registerUserCommand.emailAddress()
-						, registerUserCommand.address()
-						, null
-						, registerUserCommand.primaryTelephone() 
-						, registerUserCommand.secondaryTelephone()))
-				.group(accessControlService.getGroupByName(registerUserCommand.getGroup()))
-			.build();
+	public User assembleFrom(RegisterUserCommand registerUser){
+		return new User(
+				registerUser.fullName()
+				, new ContactInfo(
+				 	registerUser.emailAddress()
+				 	, registerUser.address()
+				 	, null
+				 	, registerUser.primaryTelephone()
+				 	, registerUser.secondaryTelephone()
+				)
+				, registerUser.getUsername()
+				, registerUser.getPassword()
+				, registerUser.getGroup()
+				);
 	}
 }

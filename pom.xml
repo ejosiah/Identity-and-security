@@ -9,11 +9,16 @@
 	<packaging>pom</packaging>
 
 	<name>Identity and security</name>
+	
+	<properties>
+		<spring.version>3.2.3.RELEASE</spring.version>
+	</properties>
 
 	<modules>
 		<module>identity-and-security-core</module>
 		<module>identity-and-security-mongo</module>
 		<module>events</module>
+		<module>identity-and-security-hibernate</module>
 	</modules>
 
 	<dependencyManagement>
@@ -125,6 +130,28 @@
 				<groupId>org.springframework.data</groupId>
 				<artifactId>spring-data-mongodb</artifactId>
 				<version>1.2.3.RELEASE</version>
+			</dependency>
+			
+			<!-- spring dependencies -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aop</artifactId>
+				<version>${spring.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

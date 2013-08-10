@@ -10,12 +10,12 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.jebhomenye.identityandsecurity.domain.model.user.Role;
-import com.jebhomenye.identityandsecurity.domain.model.user.IdentityUser;
+import com.jebhomenye.identityandsecurity.domain.model.user.User;
 
 @Named
 public class UserDetailsAssembler {
 	
-	public UserDetails assembleFrom(IdentityUser user){
+	public UserDetails assembleFrom(User user){
 		return new org.springframework.security.core.userdetails.User(
 				user.username() 
 				, user.password() 
@@ -29,7 +29,7 @@ public class UserDetailsAssembler {
 	private Collection<? extends GrantedAuthority> assembleAuthorites(Collection<Role> roles) {
 		Collection<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
 		for(Role role : roles){
-			authorities.add(new SimpleGrantedAuthority(role.name()));
+			authorities.add(new SimpleGrantedAuthority(role.value()));
 		}
 		return authorities;
 	}

@@ -9,7 +9,7 @@ import com.jebhomenye.identityandsecurity.application.RegisterUserCommand;
 import com.jebhomenye.identityandsecurity.application.RegistratoinService;
 import com.jebhomenye.identityandsecurity.domain.model.user.AccessControlService;
 import com.jebhomenye.identityandsecurity.domain.model.user.Group;
-import com.jebhomenye.identityandsecurity.domain.model.user.IdentityUser;
+import com.jebhomenye.identityandsecurity.domain.model.user.User;
 import com.jebhomenye.identityandsecurity.domain.model.user.Role;
 import com.jebhomenye.identityandsecurity.domain.model.user.UserRepository;
 
@@ -50,7 +50,7 @@ public class Main {
 		accessControlService.createGroup(superUserGroup);*/
 		
 		UserRepository userRepo = context.getBean(UserRepository.class);
-		IdentityUser user = userRepo.userOfUsername("ejosiah");
+		User user = userRepo.userOfUsername("ejosiah");
 		System.out.println(user);
 	}	
 }

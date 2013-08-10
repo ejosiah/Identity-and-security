@@ -7,7 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import com.jebhomenye.identityandsecurity.domain.model.user.IdentityUser;
+import com.jebhomenye.identityandsecurity.domain.model.user.User;
 import com.jebhomenye.identityandsecurity.domain.model.user.UserContext;
 import com.jebhomenye.identityandsecurity.domain.model.user.UserRepository;
 
@@ -17,7 +17,7 @@ public class SpringSecurityUserContext implements UserContext {
 	@Inject
 	private UserRepository userRepository;
 
-	public IdentityUser currentUser() {
+	public User currentUser() {
 		SecurityContext securityContext = SecurityContextHolder.getContext();
 		Authentication authentication = securityContext.getAuthentication();
 		String username = authentication.getName();
@@ -25,7 +25,7 @@ public class SpringSecurityUserContext implements UserContext {
 		return userRepository.userOfUsername(username);
 	}
 
-	public void setCurrentUser(IdentityUser user) {
+	public void setCurrentUser(User user) {
 		throw new UnsupportedOperationException("setCurrentUser not Supported");
 		
 	}
