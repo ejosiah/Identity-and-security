@@ -17,15 +17,24 @@ import com.jebhomenye.domain.common.event.DomainEvent;
 @Setter(AccessLevel.NONE)
 @EqualsAndHashCode(callSuper=true)
 public class UserRegistered extends DomainEvent{
+
+	private static final long serialVersionUID = 1L;
 	
-	private EmailAddress emailAddress;
-	private FullName name;
+	private FullName fullName;
 	private UserId userId;
 	private String username;
+	private transient String password;
+	private String groupName;
+	private ContactInfo contactInfo;
+	private int version;
 
 	@Override
 	public boolean sameValuesAs(DomainEvent other) {
 		return this.equals(other);
+	}
+	
+	public long getEventVersion(){
+		return serialVersionUID;
 	}
 
 }

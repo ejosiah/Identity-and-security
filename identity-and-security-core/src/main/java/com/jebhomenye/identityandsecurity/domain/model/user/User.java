@@ -5,18 +5,21 @@ import org.joda.time.DateTime;
 
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Setter;
 import lombok.val;
 import lombok.experimental.Accessors;
 import lombok.experimental.Builder;
 
+import com.jebhomenye.domain.common.core.AggregateRoot;
 import com.jebhomenye.domain.common.core.Entity;
 import com.jebhomenye.domain.common.event.DomainEventPublisher;
 import com.jebhomenye.identityandsecurity.domain.model.DomainRegistry;
 
 @Data
 @Accessors(fluent=true)
-public class User implements Entity<User, UserId> {
+@EqualsAndHashCode(callSuper=false)
+public class User extends AggregateRoot<User, UserId, UserMomento> {
 	
 	private UserId id;
 	private FullName fullName;
@@ -25,6 +28,7 @@ public class User implements Entity<User, UserId> {
 	private String username;
 	private String password;
 	private Group group;
+	private int version;
 	
 	User(){
 		
@@ -32,21 +36,28 @@ public class User implements Entity<User, UserId> {
 	
 	public User(FullName fullName, ContactInfo contactInfo
 			,String username, String password, String groupName){
+
 		createId();
-		fullName(fullName);
-		username(username);
-		password(password);
-		this.contactInfo = contactInfo;
+		apply(new UserRegistered(
+						fullName
+						, id
+						, username
+						, DomainRegistry
+							.passwordService()
+								.encyrpt(password)
+						, groupName
+						, contactInfo
+						, version+1));
+	}
+	
+	public void when(UserRegistered userRegistered){
+		fullName(userRegistered.fullName());
+		username(userRegistered.username());
+		password(userRegistered.password());
+		version(userRegistered.version());
+		this.contactInfo = userRegistered.contactInfo();
 		defaultEnablement();
-		group(groupName);
-		
-		DomainEventPublisher
-			.instance()
-			.publish(new UserRegistered(
-					contactInfo.emailAddress(),
-					fullName,
-					id,
-					username));
+		group(userRegistered.groupName());
 	}
 	
 	private void defaultEnablement() {
@@ -82,9 +93,7 @@ public class User implements Entity<User, UserId> {
 	
 	private void password(String password){
 		Validate.notNull(password, "password is required");
-		this.password = DomainRegistry
-							.passwordService()
-								.encyrpt(password);
+		this.password = password;
 	}
 	
 	private void group(String userGroup){
@@ -102,19 +111,63 @@ public class User implements Entity<User, UserId> {
 		return enablement.isEnabled();
 	}
 	
+	@Override
 	public boolean sameIdentityAs(User other) {
 		return this.id.sameValuesAs(other.id);
 	}
 	
 	public void changePassword(String currentPassword, String newPassword){
-		// TODO change password;
+		apply(new PasswordChanged(
+				DomainRegistry.passwordService().encyrpt(currentPassword),
+				DomainRegistry.passwordService().encyrpt(newPassword)));
 	}
 	
-	public void changeContactInfo(ContactInfo newContactInfo){
+	public void when(PasswordChanged passwordChanged){
+		Validate.isTrue(this.password.equals(passwordChanged.currentPassword())
+				, "invalid password");
+		password(passwordChanged.newPassword());
+	}
+	
+	public void changeHomeAddress(Address homeAddress){
 		// TODO - change contact info
 	}
 	
 	public UserDescriptor UserDescriptor(){
 		return new UserDescriptor(id, username, contactInfo.emailAddress().value());
+	}
+	
+	@Override
+	public void version(int value){
+		version = value;
+	}
+	
+	@Override
+	public int version() {
+		return version;
+	}
+
+	@Override
+	public UserMomento takeSnapShot() {
+		return new UserMomento(
+				id.value()
+				, version
+				, fullName
+				, username
+				, password
+				, group.name()
+				, enablement
+				, contactInfo);
+	}
+
+	@Override
+	public void restoreFrom(UserMomento userMomento) {
+		id(new UserId(userMomento.getUserId()));
+		version(userMomento.getVersion());
+		fullName(userMomento.getFullName());
+		username(userMomento.getUsername());
+		password(userMomento.getPassword());
+		group(userMomento.getGroup());
+		enablement(userMomento.getEnablement());
+		contactInfo(userMomento.getContactInfo());
 	}
 }
